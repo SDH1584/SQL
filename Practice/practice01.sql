@@ -125,7 +125,7 @@ order by
 정확하지 않지만, 지사가 있을 것으로 예상되는 나라들을 나라이름을 대문자로 출력하고
 올림차순(ASC)으로 정렬해 보세오*/
 select
-    country_name
+   initcap(country_name)
 from
     countries
 order by
