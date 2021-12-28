@@ -1,91 +1,4 @@
-/*
-문제1.
-직원들의 사번(employee_id), 이름(firt_name), 성(last_name)과 부서명(department_name)을
-조회하여 부서이름(department_name) 오름차순, 사번(employee_id) 내림차순 으로 정렬하세
-요.
-(106건*/
-select
-    em.employee_id,
-    em.first_name,
-    em.last_name,
-    de.department_name
-from
-    employees   em,
-    departments de
-where
-    em.department_id = de.department_id
-order by
-    de.department_name asc,
-    em.employee_id desc;
-
-/*문제2.
-employees 테이블의 job_id는 현재의 업무아이디를 가지고 있습니다.
-직원들의 사번(employee_id), 이름(firt_name), 급여(salary), 부서명(department_name), 현
-재업무(job_title)를 사번(employee_id) 오름차순 으로 정렬하세요.
-부서가 없는 Kimberely(사번 178)은 표시하지 않습니다.
-(106건)*/
-select
-    em.employee_id,
-    em.first_name,
-    em.salary,
-    de.department_name,
-    jo.job_title
-from
-    employees   em,
-    jobs        jo,
-    departments de
-where
-    em.job_id = jo.job_id
-    and em.department_id = de.department_id
-order by
-    em.employee_id desc;
-/*문제2-1.
-문제2에서 부서가 없는 Kimberely(사번 178)까지 표시해 보세요
-(107건*/
-select
-    em.employee_id,
-    em.first_name,
-    em.salary,
-    de.department_name,
-    jo.job_title
-from
-    employees   em,
-    jobs        jo,
-    departments de
-where
-    em.job_id  = jo.job_id
-    and em.department_id = de.department_id(+)
-order by
-    em.employee_id desc
-;    
-    /*문제3.
-도시별로 위치한 부서들을 파악하려고 합니다.
-도시아이디, 도시명, 부서명, 부서아이디를 도시아이디(오름차순)로 정렬하여 출력하세요
-부서가 없는 도시는 표시하지 않습니다.
-(27건)*/
-select lo.location_id,
-        lo.city,
-        de.department_name,
-        de.department_id
-        
-from locations lo , departments de
-where lo.location_id=de.location_id
-order by lo.location_id desc
-;
-    /*문제3-1.
-문제3에서 부서가 없는 도시도 표시합니다.
-(43건*/
-    select lo.location_id,
-        lo.city,
-        de.department_name,
-        de.department_id
-        
-from locations lo , departments de
-where lo.location_id=de.location_id(+)
-order by lo.location_id desc
-;
-/*
-문제1.
+/*문제1.
 직원들의 사번(employee_id), 이름(firt_name), 성(last_name)과 부서명(department_name)을
 조회하여 부서이름(department_name) 오름차순, 사번(employee_id) 내림차순 으로 정렬하세
 요.
@@ -359,3 +272,11 @@ select  de.department_id,
 (department_name), 매니저(manager)의 이름(first_name)을 조회하세요.
 부서가 없는 직원(Kimberely)도 표시합니다.
 (106명)*/
+select em.employee_id,
+        em.first_name,
+        de.department_name,
+        me.first_name
+from employees em , departments de ,employees me
+where em.department_id(+)=de.department_id
+and em.employee_id=me.manager_id
+;

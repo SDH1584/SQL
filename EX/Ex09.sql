@@ -121,7 +121,7 @@ drop table author;
 drop table book;
 delete from book;
 
-selectr *from author;
+select *from author;
 
 
 
